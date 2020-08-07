@@ -16,7 +16,6 @@
 
 ### Association
 - has_many :items
-- belongs_to :address
 - belongs_to :buy
 
 ## items テーブル
@@ -36,7 +35,7 @@
 
 ### Association
 - belongs_to :users
-- belongs_to :buy
+- has_one :buy
 
 ## address テーブル
 
@@ -60,10 +59,9 @@
 | ---------- | ---------- | ----------- |
 | user_id    | references | null: false, foreign_key: true |
 | items_id   | references | null: false, foreign_key: true |
-| address_id | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :items
 - belongs_to :users
-- belongs_to :address
+- has_one :address
