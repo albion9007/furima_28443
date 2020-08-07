@@ -31,7 +31,7 @@
 | delivery_fee  | integer    | null: false |
 | ship_locate   | integer    | null: false |
 | ship_date     | integer    | null: false |
-| price         | string     | null: false |
+| price         | integer    | null: false |
 
 ### Association
 - belongs_to :user
@@ -57,8 +57,8 @@
 
 | Column     | Type       | Options     |
 | ---------- | ---------- | ----------- |
-| user_id    | references | null: false, foreign_key: true |
-| items_id   | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 ### Association
 
