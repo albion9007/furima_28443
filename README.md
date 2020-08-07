@@ -16,7 +16,8 @@
 
 ### Association
 - has_many :items
-
+- belongs_to :address
+- belongs_to :buy
 
 ## items テーブル
 
@@ -35,20 +36,34 @@
 
 ### Association
 - belongs_to :users
-- belongs_to :address
-
+- belongs_to :buy
 
 ## address テーブル
 
 | Column       | Type       | Options     |
 | ------------ | ---------- | ----------- |
-| post_num     | integer    | null: false |
+| post_num     | string     | null: false |
 | prefecture   | integer    | null: false |
 | city         | string     | null: false |
-| house_num    | integer    | null: false |
+| house_num    | string     | null: false |
 | apart        | string     | null: false |
-| tel          | integer    | null: false |
+| tel          | string     | null: false |
+
+### Association
+
+- belongs_to :buy
+- belongs_to :users
+
+## buy テーブル
+
+| Column     | Type       | Options     |
+| ---------- | ---------- | ----------- |
+| user_id    | references | null: false, foreign_key: true |
+| items_id   | references | null: false, foreign_key: true |
+| address_id | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :items
+- belongs_to :users
+- belongs_to :address
