@@ -26,7 +26,7 @@
 | image         | text       | null: false |
 | name          | string     | null: false |
 | explain       | text       | null: false |
-| seller        | references | null: false, foreign_key: true |
+| user_id       | references | null: false, foreign_key: true |
 | category      | integer    | null: false |
 | item_status   | integer    | null: false |
 | delivery_fee  | integer    | null: false |
@@ -46,7 +46,7 @@
 | prefecture   | integer    | null: false |
 | city         | string     | null: false |
 | house_num    | string     | null: false |
-| apart        | string     | null: false |
+| apart        | string     |             |
 | tel          | string     | null: false |
 
 ### Association
