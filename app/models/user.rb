@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :buys
+  validates :password, presence: true, length: { minimum: 6 }
 end
