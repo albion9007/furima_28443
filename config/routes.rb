@@ -4,4 +4,5 @@ Rails.application.routes.draw do
     :sessions => 'users/sessions'
    }
   root 'items#index'
+  resources :users, only: [:index, :new, :create, :destroy, :update]
 end
