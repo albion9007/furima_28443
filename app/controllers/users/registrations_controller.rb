@@ -5,10 +5,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   @user = User.new
-  # end
+  def new
+    @user = User.new
+  end
+  
 
+  def create
+    @user = User.new(sign_up_params)
+    #バリデーションで問題があれば、保存はされず「登録画面」に戻る
+    if @user.save
+      redirect_to controller: :users, action: :index
+    else
+      render "new"
+    end
+  end
   # POST /resource
   # def create
   #   if @user = User.new(sign_up_params)
