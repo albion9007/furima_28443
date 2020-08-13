@@ -7,36 +7,30 @@ class User < ApplicationRecord
   has_many :items
   has_many :buys
 
-  # ニックネームが必須であること
-  validates :nickname, presence:  true
 
+  # ニックネーム、ユーザー本名の名字と名前・フリガナの名字と名前がそれぞれ必須であること
 
-  # パスワードは6文字以上であること
-  validates :password, length: { minimum: 6 }
-  
-  # パスワードは半角英数字混合であること
+  with_options presence: true do
 
-  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/, message: 'Include both letters and numbers' }
+    # nicknameには大文字小文字の区別がある事
+    validates :nickname, uniqueness: { case_sensitive: true }
 
-  # ユーザー本名が、名字と名前がそれぞれ必須であること
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+    # パスワードは半角英数字混合であること
+    enletters = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/
+    validates :password, format: { with: enletters, message: 'Include both letters and numbers' }
 
-  # ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させること
-  validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'Full-width characters' }
+    # ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させること
+    kanji = /\A[ぁ-んァ-ン一-龥]+\z/
+    validates :first_name, format: { with: kanji, message: 'Full-width characters' }
+    validates :last_name, format: { with: kanji, message: 'Full-width characters' }
 
-  # validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ }
-  validates :last_name, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'Full-width characters' }
+    # ユーザー本名のフリガナは全角（カタカナ）で入力させること
+    zenkaku-kana = /\A[ァ-ン]+\z/
+    validates :first_name_kana, format: { with: zenkaku-kana, message: 'Full-width katakana characters' }
+    validates :last_name_kana, format: { with: zenkaku-kana, message: 'Full-width katakana characters' }
 
-  # ユーザー本名のフリガナが、名字と名前でそれぞれ必須であること
-  validates :first_name_kana, presence: true
-  validates :last_name_kana,  presence: true
-
-  # ユーザー本名のフリガナは全角（カタカナ）で入力させること
-  validates :first_name_kana, format: { with: /\A[ァ-ン]+\z/, message: 'Full-width katakana characters' }
-  validates :last_name_kana, format: { with: /\A[ァ-ン]+\z/, message: 'Full-width katakana characters' }
-
-  # 生年月日が必須であること
-  validates :birth_date, presence: true
+    # 生年月日が必須であること
+    validates :birth_date
+  end
 
 end
