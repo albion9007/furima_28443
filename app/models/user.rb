@@ -9,7 +9,6 @@ class User < ApplicationRecord
 
 
   # ニックネーム、ユーザー本名の名字と名前・フリガナの名字と名前がそれぞれ必須であること
-
   with_options presence: true do
 
     # nicknameには大文字小文字の区別がある事
@@ -25,9 +24,9 @@ class User < ApplicationRecord
     validates :last_name, format: { with: kanji, message: 'Full-width characters' }
 
     # ユーザー本名のフリガナは全角（カタカナ）で入力させること
-    zenkaku-kana = /\A[ァ-ン]+\z/
-    validates :first_name_kana, format: { with: zenkaku-kana, message: 'Full-width katakana characters' }
-    validates :last_name_kana, format: { with: zenkaku-kana, message: 'Full-width katakana characters' }
+    zenkana = /\A[ァ-ン]+\z/
+    validates :first_name_kana, format: { with: zenkana, message: 'Full-width katakana characters' }
+    validates :last_name_kana, format: { with: zenkana, message: 'Full-width katakana characters' }
 
     # 生年月日が必須であること
     validates :birth_date
