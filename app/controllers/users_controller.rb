@@ -8,15 +8,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # def create
-  #   @user = User.new(user_params)
-  #   #バリデーションで問題があれば、保存はされず「登録画面」に戻る
-  #   if @user.save
-  #     redirect_to controller: :users, action: :index
-  #   else
-  #     render "new"
-  #   end
-  # end
 
   # def index
   # end
