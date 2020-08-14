@@ -13,12 +13,9 @@ class User < ApplicationRecord
     # nicknameには大文字小文字の区別がある事
     validates :nickname, uniqueness: { case_sensitive: true }
 
-    # メールアドレスは@を含む必要があること
-    # validates : format: { with: /\A(?=.*?[@])+\z/, message: "is invalid"}
-
     # パスワードは半角英数字混合であること
-    enletters = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/
-    validates :password, format: { with: enletters, message: 'Include both letters and numbers' }
+    # enletters = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/
+    # validates :password, format: { with: enletters, message: 'Include both letters and numbers' }
 
     # ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させること
     kanji = /\A[ぁ-んァ-ン一-龥]+\z/
