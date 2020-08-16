@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_08_16_110237) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
+    t.string "item_pic", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +36,6 @@ ActiveRecord::Schema.define(version: 2020_08_16_110237) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "item_name", null: false
-    t.string "item_pic", null: false
     t.text "item_explain", null: false
     t.integer "category_id", null: false
     t.integer "quality_id", null: false
@@ -43,8 +43,10 @@ ActiveRecord::Schema.define(version: 2020_08_16_110237) do
     t.integer "shipplace_id", null: false
     t.integer "shipday_id", null: false
     t.integer "price", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -66,4 +68,5 @@ ActiveRecord::Schema.define(version: 2020_08_16_110237) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "users"
 end
