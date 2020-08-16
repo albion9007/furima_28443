@@ -1,5 +1,6 @@
-window.addEventListener('load', function(){
-
+// window.addEventListener('load', function(){
+document.addEventListener("turbolinks:load", function(){
+ 
   const pricefield = document.getElementById("item-price")
 
   pricefield.addEventListener('keyup', function() {
