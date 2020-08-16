@@ -1,6 +1,4 @@
 class ItemsController < ApplicationController
-  def index
-  end
 
   def new
     @item = Item.new
@@ -13,6 +11,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def index
+    @items = Item.order("created_at DESC")
   end
 
     def destroy
