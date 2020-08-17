@@ -9,20 +9,30 @@ class ItemsController < ApplicationController
     @items = Item.order("created_at DESC")
   end
 
+  # def create
+  #   @item = Item.new(item_params)
+  #   if @item.save
+  #     redirect_to root_path
+  #   else
+  #     render :"new"
+  #   end
+  # end
+  
   def create
     @item = Item.new(item_params)
-    if @item.save
-      redirect_to root_path
+    if @item.valid?
+      @item.save  # バリデーションをクリアした時
+      return redirect_to root_path
     else
-      render :"new"
+      render "new"    # バリデーションに弾かれた時
     end
   end
-
-    def destroy
-      item = Item.find(params[:id])
-      item.destroy
-      redirect_to root_path
-    end
+  
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to root_path
+  end
 
   private
 

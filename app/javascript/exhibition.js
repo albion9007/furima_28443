@@ -14,10 +14,3 @@ document.addEventListener("turbolinks:load", function(){
     addProfitfield.innerHTML = profitfield
   })
 })
-// let title = document.querySelector("h1")
-
-// $(function () {
-//   $(document).on("mouseover", "h1", function () {
-//   }).on("mouseout", "h1", function () {
-//   })
-// });
