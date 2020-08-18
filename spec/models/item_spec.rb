@@ -4,19 +4,8 @@ RSpec.describe Item, type: :model do
 
   describe '#create' do
     before do
-      @user = FactoryBot.create(:user)
       @item = FactoryBot.build(:item)
-      # @item.image = fixture_file_upload('/flag.png','image/png')
     end
-
-  # 画像は1枚必須であること(ActiveStorageを使用すること)
-  # 商品名が必須であること
-  # 商品の説明が必須であること
-  # カテゴリーの情報が必須であること
-  # 商品の状態についての情報が必須であること
-  # 配送料の負担についての情報が必須であること
-  # 発送元の地域についての情報が必須であること
-  # 発送までの日数についての情報が必須であること
 
     describe '商品を出品する時' do
       context '出品が出来た時' do
@@ -47,34 +36,34 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Item explain can't be blank")
         end
 
-        it "category_idが空では出品出来ない" do
-          @item.category_id = ""
+        it "category_idが---では出品出来ない" do
+          @item.category_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Category Select")
         end
 
-        it "quality_idが空では出品出来ない" do
-          @item.quality_id = ""
+        it "quality_idが---では出品出来ない" do
+          @item.quality_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Quality can't be blank", "Quality Select")
+          expect(@item.errors.full_messages).to include( "Quality Select" )
         end
 
-        it "deliveryfee_idが空では出品出来ない" do
-          @item.deliveryfee_id = ""
+        it "deliveryfee_idが---では出品出来ない" do
+          @item.deliveryfee_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Deliveryfee can't be blank", "Deliveryfee Select")
+          expect(@item.errors.full_messages).to include( "Deliveryfee Select" )
         end
 
-        it "shipplace_idが空では出品出来ない" do
-          @item.shipplace_id = ""
+        it "shipplace_idが---では出品出来ない" do
+          @item.shipplace_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Shipplace Select")
+          expect(@item.errors.full_messages).to include( "Shipplace Select" )
         end
 
-        it "shipday_idが空では出品出来ない" do
-          @item.shipday_id = ""
+        it "shipday_idが---では出品出来ない" do
+          @item.shipday_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include("Shipday can't be blank", "Shipday Select")
+          expect(@item.errors.full_messages).to include( "Shipday Select" )
         end
 
         it "priceが空では登録できない" do
@@ -82,8 +71,6 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include("Price can't be blank")
         end
-
-        # 価格の範囲が、¥300~¥9,999,999の間であること
 
         it "価格が半角で入力されていなければ出品出来ない" do
           @item.price = "５００"
@@ -96,6 +83,13 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include("Price Out of setting range")
         end
+
+        it "価格の範囲が、¥300~¥9,999,999の間でなければ出品出来ない" do
+          @item.price = "100000000"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price Out of setting range")
+        end
+
       end
     end
   end
