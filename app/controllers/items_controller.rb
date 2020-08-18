@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.order("created_at DESC")
+    @items = Item.includes(:user).order("created_at DESC")
   end
   
   def create
@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
       @item.save  # バリデーションをクリアした時
       return redirect_to root_path
     else
+      # @items = @item.includes(:user)
       render "new"    # バリデーションに弾かれた時
     end
   end
