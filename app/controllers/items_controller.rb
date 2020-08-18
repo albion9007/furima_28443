@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show, :search]
 
   def new
     @item = Item.new
@@ -8,13 +8,12 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order("created_at DESC")
-
   end
   
   def create
-    @user = User.find(params[:current_user_id])
-    @item = @user.items.new(item_params)
-    if  @item.save  # バリデーションをクリアした時
+    @item = Item.new(item_params)
+    if @item.valid?
+      @item.save  # バリデーションをクリアした時
       return redirect_to root_path
     else
       render "new"    # バリデーションに弾かれた時
