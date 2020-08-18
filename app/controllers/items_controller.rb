@@ -7,10 +7,12 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order("created_at DESC")
+
   end
   
   def create
-    @item = Item.new(item_params)
+    @user = User.find(params[:current_user_id])
+    @item = @user.items.new(item_params)
     if  @item.save  # バリデーションをクリアした時
       return redirect_to root_path
     else
