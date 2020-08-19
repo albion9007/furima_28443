@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   # users 'users#index'
   resources :users, only: [:update]
   resources :items, only: [:new, :create, :index, :destroy]
+  resources :buys, only: [:new, :create, :index, :destroy]
   # :index, :new, :create, :destroy, 
 end
