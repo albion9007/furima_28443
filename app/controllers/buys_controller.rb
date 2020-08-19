@@ -1,4 +1,15 @@
 class BuysController < ApplicationController
+
+
+  def new
+    @buy = Buy.new
+    
+  end
+  
+  def index
+    @buy = Buy.includes(:item)
+  end
+  
   def create
     Buys.create(buy_params)
   end

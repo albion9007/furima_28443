@@ -10,6 +10,7 @@ class CreateBuys < ActiveRecord::Migration[6.0]
       t.integer :shipday_id,     null: false
       t.integer :price,          null: false
       t.references :user, foreign_key: true
+      t.references :item, foreign_key: true
       t.timestamps
     end
   end
