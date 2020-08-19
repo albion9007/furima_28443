@@ -16,7 +16,6 @@ class ItemsController < ApplicationController
       @item.save  # バリデーションをクリアした時
       return redirect_to root_path
     else
-      # @items = @item.includes(:user)
       render "new"    # バリデーションに弾かれた時
     end
   end
