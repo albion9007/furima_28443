@@ -13,9 +13,6 @@ class ItemsController < ApplicationController
   def show
   end
 
-  # def edit
-  # end
-
   def update
     if @item.update(item_params)  # バリデーションをクリアした時
     redirect_to item_path
