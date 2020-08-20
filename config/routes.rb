@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'items#index'
   # users 'users#index'
   resources :users, only: [:update]
-  resources :items, only: [:new, :create, :index, :destroy, :show, :edit]
+  resources :items, only: [:new, :create, :index, :destroy, :show, :edit, :update]
   resources :buys, only: [:new, :create, :index, :destroy]
   # :index, :new, :create, :destroy, 
 end
