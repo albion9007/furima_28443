@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_item, only: [:show]
+  before_action :set_item, only: [:show, :edit]
 
   def new
     @item = Item.new
@@ -11,6 +11,9 @@ class ItemsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
   end
 
   def create
