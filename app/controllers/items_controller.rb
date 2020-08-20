@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit]
+  before_action :set_item, only: [:show, :edit, :update]
 
   def new
     @item = Item.new
@@ -17,9 +17,11 @@ class ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:id])
-    item.update(item_params)
+    if @item.update(item_params)  # バリデーションをクリアした時
     redirect_to item_path
+    else
+      render :edit  # バリデーションに弾かれた時
+    end
   end
     
   def create
