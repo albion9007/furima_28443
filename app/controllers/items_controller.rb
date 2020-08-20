@@ -1,15 +1,18 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show, :search]
+  before_action :move_to_index, except: [:index, :show]
+  before_action :set_item, only: [:show]
 
   def new
     @item = Item.new
-    
   end
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
   end
-  
+
+  def show
+  end
+
   def create
     @item = Item.new(item_params)
     if @item.valid?
@@ -26,6 +29,10 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:item_name, :image,
        :item_explain, :category_id,:quality_id, :deliveryfee_id,
        :shipplace_id, :shipday_id, :price).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 
   def move_to_index
