@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def new
     @item = Item.new
@@ -28,9 +28,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item.destroy
+    redirect_to root_path
+  end
+
   private
 
   def item_params
+    # binding.pry
     params.require(:item).permit(:item_name, :image,
        :item_explain, :category_id,:quality_id, :deliveryfee_id,
        :shipplace_id, :shipday_id, :price).merge(user_id: current_user.id)
