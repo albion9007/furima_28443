@@ -4,27 +4,29 @@ class BuysController < ApplicationController
   before_action :move_to_index
 
   def new
-    # @buy = Buy.new
-    @buy = User.new
-    
+    @buy = Buy.new
+    @buy = Buy.includes(:item)
+    @item = Item.find(params[:item_id])
   end
 
   def create
     # @buy = Buy.new(price: buy_params[:price])
-    @buy = User.create(buy_params)
+    @buy = BuyAddress.new(price: buy_params[:price])
     if @buy.valid?
       pay_item
       @buy.save
       return redirect_to root_path
     end
-    render 'index'
+    render 'new'
   end
 
   private
 
   def buy_params
     params.permit(:price, :token)
-    params.require(:user).permit(:name, :name_reading, :nickname)
+    params.permit(:user_id)
+    params.require(:item).permit(:image,:item_explain,
+       :deliveryfee_id,:price).merge(user_id)
   end
 
   def pay_item
@@ -38,6 +40,12 @@ class BuysController < ApplicationController
 
   def set_item
     @item=Item.find(params[:item_id])
+  end
+
+  def item_params
+    params.require(:item).permit(:item_name,:image,
+       :item_explain, :category_id,:quality_id, :deliveryfee_id,
+       :shipplace_id, :shipday_id, :price).merge(user_id)
   end
 
   def move_to_session
