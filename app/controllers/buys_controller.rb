@@ -4,11 +4,14 @@ class BuysController < ApplicationController
   before_action :move_to_index
 
   def new
-    @buy = Buy.new
+    # @buy = Buy.new
+    @buy = User.new
+    
   end
 
   def create
-    @buy = Buy.new(price: buy_params[:price])
+    # @buy = Buy.new(price: buy_params[:price])
+    @buy = User.create(buy_params)
     if @buy.valid?
       pay_item
       @buy.save
@@ -21,6 +24,7 @@ class BuysController < ApplicationController
 
   def buy_params
     params.permit(:price, :token)
+    params.require(:user).permit(:name, :name_reading, :nickname)
   end
 
   def pay_item

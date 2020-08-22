@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :buys
+  has_many :address
 
   # ニックネーム、ユーザー本名の名字と名前・フリガナの名字と名前がそれぞれ必須であること
   with_options presence: true do
