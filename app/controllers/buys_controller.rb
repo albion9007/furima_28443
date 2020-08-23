@@ -1,17 +1,14 @@
 class BuysController < ApplicationController
-  before_action :set_item, only: [:new, :create]
+  before_action :set_item, only: [:new, :create, :pay_item]
   before_action :move_to_session
   before_action :move_to_index
-
   def new
     @buy = Buy.new
     @buy = Buy.includes(:item)
-    @item = Item.find(params[:item_id])
   end
 
   def create
-    # @buy = Buy.new(price: buy_params[:price])
-    @buy = BuyAddress.new(price: buy_params[:price])
+    @buy = BuyAddress.new(buy_params)
     if @buy.valid?
       pay_item
       @buy.save
@@ -23,16 +20,14 @@ class BuysController < ApplicationController
   private
 
   def buy_params
-    params.permit(:price, :token)
-    params.permit(:user_id)
-    params.require(:item).permit(:image,:item_explain,
-       :deliveryfee_id,:price).merge(user_id)
+    params.permit(:post_num, :prefecture_id, :city,
+      :house_num, :apart_name, :tel, :item_id, :token).merge(user_id: current_user.id)
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = "sk_test_88231388711025c7612f21e1"
     Payjp::Charge.create(
-      amount: buy_params[:price],
+      amount: @item.price,
       card: buy_params[:token],
       currency:'jpy'
     )
@@ -43,7 +38,7 @@ class BuysController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:item_name,:image,
+    params.require(item_id).permit(:item_name,:image,
        :item_explain, :category_id,:quality_id, :deliveryfee_id,
        :shipplace_id, :shipday_id, :price).merge(user_id)
   end

@@ -10,16 +10,6 @@ class ApplicationController < ActionController::Base
        :first_name, :last_name, :first_name_kana, :last_name_kana, :birth_date])
   end
 
-  # def after_sign_up_path_for(resource)
-  #   user_path(current_user.id) 
-  # end
-
-  # def after_sign_in_path_for(resource)
-  #   root_path
-  # end
-
-  # :password, :encrypted_password,
-
   private
 
   def basic_auth

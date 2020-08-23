@@ -4,11 +4,6 @@ class AddressController < ApplicationController
     @address = BuyAddress.new
   end
 
-  def create
-    @address = BuyAddress.new(address_params)
-    @address.save
-  end
-
   private
 
   def address_params
