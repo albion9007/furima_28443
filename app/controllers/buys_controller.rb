@@ -2,6 +2,7 @@ class BuysController < ApplicationController
   before_action :set_item, only: [:new, :create, :pay_item]
   before_action :move_to_session
   before_action :move_to_index
+  
   def new
     @buy = Buy.new
     @buy = Buy.includes(:item)

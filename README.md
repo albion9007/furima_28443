@@ -17,7 +17,6 @@
 ### Association
 - has_many :items
 - has_many :buys
-- has_many :address
 
 ## items テーブル
 
@@ -37,6 +36,20 @@
 ### Association
 - belongs_to :user
 - has_one :buy
+- has_one_attached :image
+
+## buy テーブル
+
+| Column     | Type       | Options     |
+| ---------- | ---------- | ----------- |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :item
+- belongs_to :user
+- has_one :address
 
 ## address テーブル
 
@@ -46,24 +59,10 @@
 | prefecture   | integer    | null: false |
 | city         | string     | null: false |
 | house_num    | string     | null: false |
-| apart_name   | string     |             |
+| apart_name   | string     | null: false |
 | tel          | string     | null: false |
+| buy          | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :buy
-- belongs_to :user
-
-## buy テーブル
-
-| Column     | Type       | Options     |
-| ---------- | ---------- | ----------- |
-| user       | references | null: false, foreign_key: true |
-| item       | references | null: false, foreign_key: true |
-| price      | integer    | null: false                    |
-
-### Association
-
-- belongs_to :item
-- belongs_to :user
-- has_one :address
