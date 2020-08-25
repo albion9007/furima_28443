@@ -41,7 +41,6 @@ RSpec.describe BuyAddress, type: :model do
     end
     it 'apart_nameは空でも保存できること' do
       @buy_address.apart_name = nil
-      # binding.pry
       expect(@buy_address).to be_valid
     end
     it 'telが空だと保存できないこと' do
@@ -52,7 +51,6 @@ RSpec.describe BuyAddress, type: :model do
     it 'telにはハイフンが有ると保存できないこと' do
       @buy_address.tel = 1234-5678
       @buy_address.valid?
-      # binding.pry
       expect(@buy_address.errors.full_messages).to include("Tel is invalid. Include hyphen(-)")
     end
     it 'telが12桁以上であると保存できないこと' do

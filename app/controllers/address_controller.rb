@@ -1,13 +1,13 @@
 class AddressController < ApplicationController
 
   def new
-    @address = BuyAddress.new
+    @buy_address = BuyAddress.new
   end
 
   def create
-    @address = BuyAddress.new(address_params)
-    if @address.valid?
-      @address.save
+    @buy_address = BuyAddress.new(address_params)
+    if @buy_address.valid?
+      @buy_address.save
     end
   end
 
