@@ -4,14 +4,15 @@ class BuysController < ApplicationController
   before_action :move_to_index
   
   def new
-    @buy = Buy.new
+    @buy_address = BuyAddress.new
   end
 
   def create
-    @buy = BuyAddress.new(buy_params)
-    if @buy.valid?
+    # binding.pry
+    @buy_address = BuyAddress.new(buy_params)
+    if @buy_address.valid?
       pay_item
-      @buy.save
+      @buy_address.save
       return redirect_to root_path
     end
     render 'new'
