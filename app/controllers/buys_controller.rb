@@ -5,7 +5,6 @@ class BuysController < ApplicationController
   
   def new
     @buy = Buy.new
-    @buy = Buy.includes(:item)
   end
 
   def create
@@ -54,6 +53,9 @@ class BuysController < ApplicationController
     if current_user.id == @item.user_id
       redirect_to root_path
     end
+
+    if @item.buy.present?
+      redirect_to root_path
+    end
   end
-  
 end
