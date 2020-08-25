@@ -1,5 +1,4 @@
 <%= render "shared/second-header"%>
-<%# <%= render 'shared/error_messages', model: f.object %> 
 
 <div class='transaction-contents'>
   <div class='transaction-main'>
@@ -34,6 +33,7 @@
 
     <%= form_with url: item_buys_path(@item.id), method: :post, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%# model: @address, %>
+    <%# <%= render 'shared/error_messages', model: f.object %> %>
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
@@ -126,7 +126,6 @@
     <div class='buy-btn'>
       <%= f.submit "購入" ,class:"buy-red-btn" %>
     </div>
-    <%# <% end %> %>
     <% end %>
   </div>
 </div>
