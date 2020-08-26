@@ -5,7 +5,6 @@ window.addEventListener('load', function(){
   pricefield.addEventListener('keyup', function() {
     // value = 
     const pricefield = this.value;
-    console.log(pricefield)
     const taxfield = Math.floor(pricefield * 0.1);
     const profitfield = pricefield - taxfield;
     const addTaxfield = document.getElementById("add-tax-price")

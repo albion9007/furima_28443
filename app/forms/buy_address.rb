@@ -9,10 +9,12 @@ class BuyAddress
     validates :city
     validates :house_num
     validates :token
-    validates :post_num, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "Input correctly"}
+    POSTAL_CODE_REGEX = /\A[0-9]{3}-[0-9]{4}\z/
+    validates :post_num, format: {with: POSTAL_CODE_REGEX, message: "Input correctly"}
     validates :prefecture_id, numericality: { greater_than: 1, message: "Select" }
-    validates :tel, format: { with: /\A[0-9]{,11}\z/, message: "can't be blank" }
-    validates :tel, format: { with: /\A[0-9]{,11}\z/, message: "is invalid. Include hyphen(-)" }
+    tel_num = /\A[0-9]{,11}\z/
+    validates :tel, format: { with: tel_num, message: "can't be blank" }
+    validates :tel, format: { with: tel_num, message: "is invalid. Include hyphen(-)" }
   end
 
   
