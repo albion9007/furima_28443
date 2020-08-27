@@ -12,11 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @user = User.new(sign_up_params)
-    # @user = @user.attributes
-    # @user[:password] = params[:user][:password]
-    # @user[:password_confirmation] = params[:user][:password_confirmation]
-    #バリデーションで問題があれば、保存はされず「登録画面」に戻る
     if @user.save
+      sign_up(resource_name, resource) 
       redirect_to root_path
     else
       render "new"

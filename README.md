@@ -36,22 +36,7 @@
 ### Association
 - belongs_to :user
 - has_one :buy
-
-## address テーブル
-
-| Column       | Type       | Options     |
-| ------------ | ---------- | ----------- |
-| post_num     | string     | null: false |
-| prefecture   | integer    | null: false |
-| city         | string     | null: false |
-| house_num    | string     | null: false |
-| apart        | string     |             |
-| tel          | string     | null: false |
-
-### Association
-
-- belongs_to :buy
-- belongs_to :user
+- has_one_attached :image
 
 ## buy テーブル
 
@@ -65,3 +50,19 @@
 - belongs_to :item
 - belongs_to :user
 - has_one :address
+
+## address テーブル
+
+| Column       | Type       | Options     |
+| ------------ | ---------- | ----------- |
+| post_num     | string     | null: false |
+| prefecture   | integer    | null: false |
+| city         | string     | null: false |
+| house_num    | string     | null: false |
+| apart_name   | string     | null: false |
+| tel          | string     | null: false |
+| buy          | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :buy
